@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @location.name %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @location.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @location.longitude %>
+</p>
+  
+
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x350&sensor=true&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+
+
+<h2> Near By Place </h2>
+<ul>
+<% for location in @location.nearbys(100) %>
+<li><%= link_to location.name, location %> (<%= location.distance.round(2) %> miles) </li>
+<% end %>
+</ul>
+<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Back', locations_path %>
